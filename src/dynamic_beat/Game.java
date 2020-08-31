@@ -3,7 +3,9 @@ package dynamic_beat;
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Game extends Thread{ //전반적인 게임 틀 안에서 하나의 게임이 하나의 단위로 동작하기 때문에 thread 이용
@@ -177,7 +179,11 @@ public class Game extends Thread{ //전반적인 게임 틀 안에서 하나의 
 
     @Override
     public void run() {
-       dropNotes();
+        try {
+            dropNotes();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void close() { // Terminate thread
@@ -187,7 +193,6 @@ public class Game extends Thread{ //전반적인 게임 틀 안에서 하나의 
     
     public void dropNotes() throws Exception {
         String[] noteType = null;
-        try {
             Beat[] beats = null;
             if (titleName.equals("Lizzo-Juice")) {
                 if (difficulty.equals("Easy")) {
@@ -236,9 +241,6 @@ public class Game extends Thread{ //전반적인 게임 틀 안에서 하나의 
                     }
                 }
             }
-        } catch (Exception e){
-            System.err.println(e.getMessage());
-                };
         };
         /*int i = 0;
         while (true) {
